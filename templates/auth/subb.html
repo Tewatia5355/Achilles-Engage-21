@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Submission Page</title>
+</head>
+
+<body>
+    <h1>Choose only one method for submission</h1>
+    <h2>OMR Sheet Submission</h2>
+    <a href="https://drive.google.com/uc?export=download&id=1e66M9VWDIIB-YgxuLaxUvn5MujE-tvNs" download> Download Empty
+        OMR sheet </a>
+    <form method="POST" action="{% url 'submit_assignment_request_omr' assignment_id=assignment_id %}"
+        enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>
+            Upload OMR sheet
+            <input type="file" name="file" accept="image/*" required />
+        </p>
+        <p><input type="submit" value="Submit" /></p>
+    </form>
+    </br>
+    <h2>Manual Submission - (Mark 0 to leave question balnk) </h2>
+    <form method="POST" action="{% url 'submit_assignment_request' assignment_id=assignment_id %}">
+        {% csrf_token %}
+        {% for i in num_ques|get_range %}
+        <p>
+            Question Number: {{ i }}
+            <input name="{{i}}" type="number" min="0" max="4" required />
+        </p>
+        {% endfor %}
+        <p><input type="submit" value="Submit" /></p>
+    </form>
+</body>
+
+</html>

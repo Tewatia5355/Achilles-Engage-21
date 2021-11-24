@@ -1,0 +1,21 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Summary</title>
+</head>
+
+<body>
+    <h4> Total students: {{ no_of_students.count }} ----- No. of Submissions: {{ submissions_count }}
+        <a href="{% url 'delete_assignment' assignment_id=assignment.id %}">Delete Assignment</a>
+    </h4>
+    <p><a href="{% get_media_prefix %}{{ assignment.question_file }}" download> Download Question Paper </a></p>
+    {% if assignment.result != "" %}
+    <p><a href="{% get_media_prefix %}{{ assignment.result }}" download> Download CSV result of student </a></p>
+    {% endif %}
+</body>
+
+</html>
