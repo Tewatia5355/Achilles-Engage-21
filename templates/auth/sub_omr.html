@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+{% load static %}
+
+<head>
+    <meta charset="utf-8" />
+    <title>OMR Check </title>
+</head>
+
+<body>
+    {% if responses %}
+    <h1>Check your responses</h1>
+    <h2>If options are correct go ahead, else go back</h2>
+    <hr>
+    {% for i,x in responses %}
+    <p>Question {{i}} : {{ x }}</p>
+    </br>
+    {% endfor %}
+    <a href="{% url 'sub_omr_success' assignment_id=assignment_id %}">Submit</a>
+    {% else %}
+    <h1>ERROR OMR WASN'T SCANNED PROPERPLY, PLEASE DO IT AGAIN</h1>
+    </br>
+    {% endif %}
+    <a href="{% url 'sub_url' assignment_id=assignment_id %}">Go Back</a>
+</body>
+
+</html>

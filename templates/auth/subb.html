@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+{% load static %}
 
 <head>
     <meta charset="utf-8" />
@@ -8,21 +9,27 @@
 
 <body>
     <h1>Choose only one method for submission</h1>
+    <a href="{% get_media_prefix %}{{ assignment.question_file }}" download> Download Question paper</a>
     <h2>OMR Sheet Submission</h2>
     <a href="https://drive.google.com/uc?export=download&id=1e66M9VWDIIB-YgxuLaxUvn5MujE-tvNs" download> Download Empty
         OMR sheet </a>
-    <form method="POST" action="{% url 'submit_assignment_request_omr' assignment_id=assignment_id %}"
+    <form method="POST" action="{% url 'submit_assignment_request_omr' assignment_id=assignment.id %}"
         enctype="multipart/form-data">
         {% csrf_token %}
         <p>
             Upload OMR sheet
             <input type="file" name="file" accept="image/*" required />
         </p>
+        <p>
+            Upload Solution file for reference
+            <input type="file" name="file2" accept=".pdf" required />
+        </p>
         <p><input type="submit" value="Submit" /></p>
     </form>
     </br>
     <h2>Manual Submission - (Mark 0 to leave question balnk) </h2>
-    <form method="POST" action="{% url 'submit_assignment_request' assignment_id=assignment_id %}">
+    <form method="POST" action="{% url 'submit_assignment_request' assignment_id=assignment.id %}"
+        enctype="multipart/form-data">
         {% csrf_token %}
         {% for i in num_ques|get_range %}
         <p>
@@ -30,6 +37,10 @@
             <input name="{{i}}" type="number" min="0" max="4" required />
         </p>
         {% endfor %}
+        <p>
+            Upload Solution file for reference
+            <input type="file" name="file2" accept=".pdf" required />
+        </p>
         <p><input type="submit" value="Submit" /></p>
     </form>
 </body>

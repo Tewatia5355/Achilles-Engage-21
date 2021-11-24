@@ -70,4 +70,9 @@ urlpatterns = [
         views.submission_summary,
         name="sub_url",
     ),
+    path(
+        "sub_omr_success/<int:assignment_id>",
+        views.submit_omr_success,
+        name="sub_omr_success",
+    ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

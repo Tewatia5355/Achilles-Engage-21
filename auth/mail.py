@@ -1,7 +1,6 @@
 from django.core.mail import send_mail
 from eng.settings import EMAIL_HOST_USER
 from .models import Submissions, Assignments, Classrooms, Students, Notification
-
 from django.contrib.auth.models import User
 from datetime import datetime
 

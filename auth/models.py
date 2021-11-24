@@ -88,6 +88,8 @@ class Submissions(models.Model):
     submitted_ans = models.TextField(null=True)
     marks_alloted = models.IntegerField(default=0)
     response_key = models.TextField(null=True)
+    omr_file = models.FileField(upload_to="documents/", default="")
+    solution_file = models.FileField(upload_to="solutions/", default="")
 
     class Meta:
         app_label = "auth"

@@ -19,6 +19,7 @@ from django.forms.models import model_to_dict
 from itertools import chain
 import os
 import pandas as pd
+import time
 
 ## Student unenrolling from a class
 @login_required(login_url="login")
@@ -128,6 +129,12 @@ def render_class(request, id):
                         username=submission.student_id.student_id
                     )
                     student = student[0].first_name
+                    solution_file = (
+                        "http://"
+                        + str(get_current_site(request))
+                        + "/media/"
+                        + str(submission.solution_file)
+                    )
                     result.append(
                         [
                             submission.student_id.student_id,
@@ -136,8 +143,10 @@ def render_class(request, id):
                             submission.submitted_time,
                             submission.marks_alloted,
                             submission.response_key,
+                            solution_file,
                         ]
                     )
+                    print("\n\n", solution_file, "\n\n")
 
                 columns = [
                     "EMAIL",
@@ -146,6 +155,7 @@ def render_class(request, id):
                     "SUBMITTED TIME",
                     "MARKS",
                     "RESPONSES",
+                    "SOLUTION FILE",
                 ]
 
                 ## Make result CSV using pandas
@@ -155,7 +165,12 @@ def render_class(request, id):
                 assignment.result = File(f)
                 assignment.save()
                 f.closed
-                os.remove(f"result_{assignment.id}.csv")
+                time.sleep(2)
+                try:
+                    os.remove(f"result_{assignment.id}.csv")
+                except Exception as e:
+                    print("\n\n", e, "\n\n")
+
             test.append([assignment, None, None])
 
     current_site = get_current_site(request)
