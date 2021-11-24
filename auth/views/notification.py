@@ -22,6 +22,8 @@ def create_notification(request, classroom_id, name):
                 author=name,
             )
             notification.save()
+            # Mailing Annoucement to each student
+            mail.notification_post_mail(notification.classroom_id, notification.id)
             # redirect to class page
             return redirect("render_class", classroom_id.id)
 
