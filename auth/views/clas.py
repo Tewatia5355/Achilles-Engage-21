@@ -105,7 +105,7 @@ def render_class(request, id):
 
                 ## if due date is past, show marks of student to
                 if dt1.time() >= dt2.time():
-                    test.append([assignment, submission.marks_alloted, total_marks])
+                    test.append([assignment, submission, total_marks])
 
                 ## if due date isn't past, don't show marks right now
                 else:

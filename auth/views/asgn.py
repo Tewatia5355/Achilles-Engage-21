@@ -22,7 +22,7 @@ def ans_key_fun(request, assignment_id):
             assignment.save()
 
             # mailing every student that one test has been created inside your classroom
-            mail.assignment_post_mail(assignment.classroom_id, assignment.id)
+            # mail.assignment_post_mail(assignment.classroom_id, assignment.id)
 
             return redirect("render_class", assignment.classroom_id.id)
         except Exception as e:
@@ -47,6 +47,11 @@ def create_assignment(request, classroom_id):
             positive_marks = int(request.POST.get("positive_marks"))
             negative_marks = int(request.POST.get("negative_marks"))
             file_name = request.FILES.get("file")
+            res_show = request.POST["res_show"]
+            if res_show == "Yes":
+                res_show = True
+            else:
+                res_show = False
             assignment = Assignments(
                 assignment_name=assignment_name,
                 due_date=due_date,
@@ -57,6 +62,7 @@ def create_assignment(request, classroom_id):
                 positive_marks=positive_marks,
                 negative_marks=negative_marks,
                 question_file=file_name,
+                show_result=res_show,
             )
             assignment.save()
 

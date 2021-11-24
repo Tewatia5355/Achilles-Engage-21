@@ -70,6 +70,7 @@ class Assignments(models.Model):
     ans_key = models.TextField(null=True, blank=True)
     result = models.FileField(upload_to="documents/")
     is_available = models.BooleanField(default=True)
+    show_result = models.BooleanField(default=False)
 
     def __str__(self):
         return self.assignment_name

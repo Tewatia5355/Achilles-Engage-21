@@ -120,9 +120,14 @@
                         <div class="card-header text-center"><strong>{{assignment.assignment_name}}</strong></div>
                         <div class="card-body">
                             {% if submission != None and submission != -1 %}
-                            <h6 class="card-title mb-4">Marks Obtained: {{submission}}/{{tmarks}}</h6>
+                            <h6 class="card-title mb-4 text-center">Marks Obtained:
+                                {{submission.marks_alloted}}/{{tmarks}}</h6>
+                            {% if assignment.show_result %}
+                            <a href="{% url 'res_key_check' assignment_id=assignment.id submission_id=submission.id %}">Click
+                                here for Answer Key</a>
+                            {% endif %}
                             {% elif submission == -1%}
-                            <h6 class="card-title mb-4">Please wait till Test due time for grading!!</h6>
+                            <h6 class="card-title mb-4 text-center ">Please wait till Test due time for grading!!</h6>
                             {% else %}
                             {% endif %}
                             <h6 class="card-text text-center mt-2">Test posted on

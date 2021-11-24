@@ -122,3 +122,19 @@ def submission_summary(request, assignment_id):
             "num_ques": assignment.num_ques,
         },
     )
+
+
+@login_required(login_url="login")
+@student_required("home")
+def res_key_check(request, assignment_id, submission_id):
+    assignment = Assignments.objects.get(pk=assignment_id)
+    submission = Submissions.objects.get(pk=submission_id)
+
+    ans_key = assignment.ans_key
+    res_key = submission.response_key
+    listt = []
+    for i in range(assignment.num_ques):
+        if res_key[i] == "0":
+            res_key[i] = "Unattempted"
+        listt.append((i + 1, ans_key[i], res_key[i]))
+    return render(request, "auth/check_response.html", {"listt": listt})

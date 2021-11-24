@@ -1,21 +1,19 @@
 {% load static %}
-
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <title>Summary</title>
+    <title>Check Responses</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css">
     <link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/table.css' %}" />
 </head>
 
 <body>
-
-    <!-- Navbar -->
+    <!-- NAVBAR -->
     <nav class="mb-4 navbar navbar-expand-lg navbar-dark indigo">
         <a class="navbar-brand" href="{% url 'profile' %}">Achilles</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
@@ -32,52 +30,29 @@
                 </li>
             </ul>
             <span class="navbar-text white-text">
-                Assignment Summary Page
+                Check Your Responses and Answer Key
             </span>
         </div>
     </nav>
 
-    <!-- Summary -->
-    <h3 class="text-center">Assignment Summary Page</h3>
-    <hr>
-    <div class="row">
-        <div class="col text-center">
-            <h4> Total Number students in Class: {{ no_of_students.count }}</h4>
-        </div>
-        <div class="col text-center">
-            <h4> No. of Submissions till now: {{ submissions_count }}</h4>
-        </div>
-        <div class="col text-center">
-            <h5><a href="{% url 'delete_assignment' assignment_id=assignment.id %}">Delete Assignment</a></h5>
-        </div>
+    <!-- Response section -->
+    <div class="container">
+        <h2>Answer Key with your Responses!</h2>
+        <ul class="responsive-table">
+            <li class="table-header">
+                <div class="col col-1 text-center"><strong>Question Number</strong></div>
+                <div class="col col-2 text-center"><strong>Correct Answer</strong></div>
+                <div class="col col-3 text-center"><strong>Your Responses</strong></div>
+            </li>
+            {% for i,ans,res in listt %}
+            <li class="table-row">
+                <div class="col col-1 text-center">{{i}}</div>
+                <div class="col col-2 text-center">{{ans}}</div>
+                <div class="col col-3 text-center">{{res}}</div>
+            </li>
+            {% endfor %}
+        </ul>
     </div>
-    <br>
-    <!-- <div class="row">
-        <div class="col text-center">
-            <h4> Some Useful Link: </h4>
-        </div>
-        <div class="col text-center">
-            <p><a href="{% get_media_prefix %}{{ assignment.question_file }}" download> Download Question Paper </a></p>
-        </div>
-        {% if assignment.result != "" %}
-        <div class="col text-center">
-            <p><a href="{% get_media_prefix %}{{ assignment.result }}" download> Download CSV result of student </a></p>
-        </div>
-        {% endif %}
-    </div> -->
-    <h5 style="margin-left: 10px;">
-        Question Paper:
-        <small><a href="{% get_media_prefix %}{{ assignment.question_file }}" download>Link
-            </a></small>
-    </h5>
-    <br>
-    {% if assignment.result != "" %}
-    <h5 style="margin-left: 10px;">
-        CSV Result Sheet:
-        <small><a href="{% get_media_prefix %}{{ assignment.result }}" download> Link
-            </a></small>
-    </h5>
-    {% endif %}
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>

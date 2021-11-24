@@ -75,4 +75,9 @@ urlpatterns = [
         views.submit_omr_success,
         name="sub_omr_success",
     ),
+    path(
+        "check_response/<int:assignment_id>/<int:submission_id>",
+        views.res_key_check,
+        name="res_key_check",
+    ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
