@@ -52,7 +52,9 @@ def render_class(request, id):
     name = request.user.first_name
     classroom = Classrooms.objects.get(pk=id)
     try:
-        assignments = Assignments.objects.filter(classroom_id=id)
+        assignments = Assignments.objects.filter(classroom_id=id).order_by(
+            "-due_date", "-due_time"
+        )
         for assignment in assignments:
             if assignment.ans_key == None:
                 assignment.delete()

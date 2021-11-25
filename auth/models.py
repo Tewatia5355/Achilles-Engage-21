@@ -44,6 +44,8 @@ class Notification(models.Model):
     posted_date = models.DateField(auto_now_add=True)
     posted_time = models.TimeField(auto_now_add=True)
     author = models.TextField(null=True)
+    attachment = models.FileField(upload_to="attachments/", default="")
+    attached = models.BooleanField(default=False)
 
     class Meta:
         app_label = "auth"

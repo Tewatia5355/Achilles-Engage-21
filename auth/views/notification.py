@@ -14,16 +14,27 @@ def create_notification(request, classroom_id, name):
         try:
             heading = request.POST.get("noti_header")
             message = request.POST.get("noti_message")
+            attachment = request.FILES.get("file", False)
             classroom_id = Classrooms.objects.get(pk=classroom_id)
-            notification = Notification(
-                classroom_id=classroom_id,
-                header=heading,
-                message=message,
-                author=name,
-            )
+            if attachment:
+                notification = Notification(
+                    classroom_id=classroom_id,
+                    header=heading,
+                    message=message,
+                    author=name,
+                    attachment=attachment,
+                    attached=True,
+                )
+            else:
+                notification = Notification(
+                    classroom_id=classroom_id,
+                    header=heading,
+                    message=message,
+                    author=name,
+                )
             notification.save()
             # Mailing Annoucement to each student
-            mail.notification_post_mail(notification.classroom_id, notification.id)
+            # mail.notification_post_mail(notification.classroom_id, notification.id)
             # redirect to class page
             return redirect("render_class", classroom_id.id)
 

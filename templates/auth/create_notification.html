@@ -49,7 +49,8 @@
     </nav>
     <div
         style="width: 500px; margin: auto; margin-top:40px; margin-bottom: 50px ;border: 5px solid purple;padding: 20px 20px 20px 20px;">
-        <form method="POST" action="{% url 'create_notification' classroom_id=classroom name=name %}">
+        <form method="POST" action="{% url 'create_notification' classroom_id=classroom name=name %}"
+            enctype="multipart/form-data">
             {% csrf_token %}
             <p style="color:black; font-family:verdana;">
                 Annoucement Heading
@@ -61,6 +62,11 @@
                 <input type="text" name="noti_message" placeholder="Details of meeting" required />
             </p>
             </br>
+            <p style="color:black;font-family:verdana;">
+                Upload Attachment: (Optional)
+                <input type="file" name="file" accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
+                text/plain, application/pdf, image/*" />
+            </p>
             <p><input type="submit" value="Submit" /></p>
         </form>
     </div>
