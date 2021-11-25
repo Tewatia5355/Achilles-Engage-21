@@ -5,23 +5,61 @@
 <head>
     <meta charset="utf-8" />
     <title>OMR Check </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
 </head>
 
 <body>
+
+    <!-- Navbar -->
+
+    <nav class="mb-4 navbar navbar-expand-lg navbar-dark indigo">
+        <a class="navbar-brand" href="{% url 'profile' %}">Achilles</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <span class="navbar-text white-text">
+                Confirm your response
+            </span>
+        </div>
+    </nav>
+
+    <!--  -->
     {% if responses %}
-    <h1>Check your responses</h1>
-    <h2>If options are correct go ahead, else go back</h2>
+    <div class="container text-centre text-warning">
+        <h2>Check your responses</h2>
+    </div>
     <hr>
-    {% for i,x in responses %}
-    <p>Question {{i}} : {{ x }}</p>
-    </br>
-    {% endfor %}
-    <a href="{% url 'sub_omr_success' assignment_id=assignment_id %}">Submit</a>
+    <div class="container">
+        {% for i,x in responses %}
+        <p><strong>Question {{i}} :</strong> {{ x }}</p>
+        {% endfor %}
+    </div>
+    <hr>
+    <div class="container">
+        <a class="bg-success text-white" href="{% url 'sub_omr_success' assignment_id=assignment_id %}">Submit</a>
+        <br>
+        <a class="bg-danger text-white" href="{% url 'sub_url' assignment_id=assignment_id %}">Go Back</a>
+    </div>
     {% else %}
-    <h1>ERROR OMR WASN'T SCANNED PROPERPLY, PLEASE DO IT AGAIN</h1>
+    <div class="container text-centre text-danger">
+        <h2>ERROR OMR WASN'T SCANNED PROPERPLY, PLEASE DO IT AGAIN</h2>
+    </div>
+    </br>
+    <div class="container">
+        <a class="bg-danger text-white" href="{% url 'sub_url' assignment_id=assignment_id %}">Go Back</a>
+    </div>
     </br>
     {% endif %}
-    <a href="{% url 'sub_url' assignment_id=assignment_id %}">Go Back</a>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script>
 
 </html>

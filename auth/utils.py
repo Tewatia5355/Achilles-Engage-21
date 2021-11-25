@@ -86,7 +86,7 @@ def calc_resp(path):
                 if bubbled is None or total > bubbled[0]:
                     bubbled = (total, j)
 
-            if bubbled[0] > 1000:
+            if bubbled[0] > 500:
                 mark[i] += str(bubbled[1] + 1)
             else:
                 mark[i] += "0"

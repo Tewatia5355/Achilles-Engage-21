@@ -5,44 +5,84 @@
 <head>
     <meta charset="utf-8" />
     <title>Submission Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
 </head>
 
 <body>
-    <h1>Choose only one method for submission</h1>
-    <a href="{% get_media_prefix %}{{ assignment.question_file }}" download> Download Question paper</a>
-    <h2>OMR Sheet Submission</h2>
-    <a href="https://drive.google.com/uc?export=download&id=1e66M9VWDIIB-YgxuLaxUvn5MujE-tvNs" download> Download Empty
-        OMR sheet </a>
-    <form method="POST" action="{% url 'submit_assignment_request_omr' assignment_id=assignment.id %}"
-        enctype="multipart/form-data">
-        {% csrf_token %}
-        <p>
-            Upload OMR sheet
-            <input type="file" name="file" accept="image/*" required />
-        </p>
-        <p>
-            Upload Solution file for reference
-            <input type="file" name="file2" accept=".pdf" required />
-        </p>
-        <p><input type="submit" value="Submit" /></p>
-    </form>
-    </br>
-    <h2>Manual Submission - (Mark 0 to leave question balnk) </h2>
-    <form method="POST" action="{% url 'submit_assignment_request' assignment_id=assignment.id %}"
-        enctype="multipart/form-data">
-        {% csrf_token %}
-        {% for i in num_ques|get_range %}
-        <p>
-            Question Number: {{ i }}
-            <input name="{{i}}" type="number" min="0" max="4" required />
-        </p>
-        {% endfor %}
-        <p>
-            Upload Solution file for reference
-            <input type="file" name="file2" accept=".pdf" required />
-        </p>
-        <p><input type="submit" value="Submit" /></p>
-    </form>
+    <!-- NAVBAR -->
+
+    <nav class="mb-4 navbar navbar-expand-lg navbar-dark indigo">
+        <a class="navbar-brand" href="{% url 'profile' %}">Achilles</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link waves-effect waves-light" href="/profile">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link waves-effect waves-light" href="/logout">Logout</a>
+                </li>
+            </ul>
+            <span class="navbar-text white-text">
+                Attempt Test Page
+            </span>
+        </div>
+    </nav>
+
+    <!--  -->
+    <h1 class="text-center">Choose only one method for submission</h1>
+    <h4 class="text-center"><a href="{% get_media_prefix %}{{ assignment.question_file }}" download> Download Question
+            paper</a></h4>
+    <hr>
+    <div class="container">
+        <h2>1. OMR Sheet Submission</h2>
+        <h5>Fill OMR online: <a href="{% url 'fill_omr' assignment_id=assignment.id %}">Link</a></h5>
+        <!-- <form method="POST" action="{% url 'submit_assignment_request_omr' assignment_id=assignment.id %}"
+            enctype="multipart/form-data">
+            
+        </form> -->
+    </div>
+    <hr>
+    <h3 class="bg-dark text-white text-center">OR</h3>
+    <hr>
+    <div class="container">
+        <h2>2. Manual Submission</h2>
+        <h5>Information: Mark 0 to leave question blank</h5>
+        </br>
+        <div class="row justify-content-center">
+            <div class="col-4" style="border: 5px solid purple;padding: 20px 20px 20px 20px;">
+                <form method=" POST" action="{% url 'submit_assignment_request' assignment_id=assignment.id %}"
+                    enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for i in num_ques|get_range %}
+                    <p style="color:black; font-family:verdana;">
+                        Question Number: {{ i }}
+                        <input name="{{i}}" type="number" min="0" max="4" required />
+                    </p>
+                    {% endfor %}
+                    <p style="color:black; font-family:verdana;">
+                        Upload Solution file for reference
+                        <input type="file" name="file2" accept=".pdf" required />
+                    </p>
+                    <p><input type="submit" value="Submit" /></p>
+                </form>
+            </div>
+        </div>
+    </div>
+    <hr>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script>
+
+
 
 </html>

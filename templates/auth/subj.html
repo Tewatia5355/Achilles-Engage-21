@@ -123,8 +123,9 @@
                             <h6 class="card-title mb-4 text-center">Marks Obtained:
                                 {{submission.marks_alloted}}/{{tmarks}}</h6>
                             {% if assignment.show_result %}
-                            <a href="{% url 'res_key_check' assignment_id=assignment.id submission_id=submission.id %}">Click
-                                here for Answer Key</a>
+                            <p class="text-center"><a
+                                    href="{% url 'res_key_check' assignment_id=assignment.id submission_id=submission.id %}">Click
+                                    here for Answer Key</a></p>
                             {% endif %}
                             {% elif submission == -1%}
                             <h6 class="card-title mb-4 text-center ">Please wait till Test due time for grading!!</h6>

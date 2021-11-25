@@ -38,17 +38,46 @@
     <!-- Response section -->
     <div class="container">
         <h2>Answer Key with your Responses!</h2>
+        <br>
+        <div class="row">
+            <div class="col text-center">
+                <h5>
+                    Marks for Correct Response: {{pos}}
+                </h5>
+            </div>
+            <div class="col text-center">
+                <h5>
+                    Marks for Incorrect Response: {{neg}}
+                </h5>
+            </div>
+            <div class="col text-center">
+                <h5>
+                    Marks Alloted: {{marks}}
+                </h5>
+            </div>
+        </div>
+        <hr>
         <ul class="responsive-table">
             <li class="table-header">
-                <div class="col col-1 text-center"><strong>Question Number</strong></div>
-                <div class="col col-2 text-center"><strong>Correct Answer</strong></div>
-                <div class="col col-3 text-center"><strong>Your Responses</strong></div>
+                <div class="col col-1 text-center">
+                    <h6><strong>Question Number</strong></h6>
+                </div>
+                <div class="col col-2 text-center">
+                    <h6><strong>Correct Answer</strong></h6>
+                </div>
+                <div class="col col-3 text-center">
+                    <h6><strong>Your Responses</strong></h6>
+                </div>
+                <div class="col col-4 text-center">
+                    <h6><strong>Judgement</strong></h6>
+                </div>
             </li>
-            {% for i,ans,res in listt %}
+            {% for i,ans,res,j in listt %}
             <li class="table-row">
                 <div class="col col-1 text-center">{{i}}</div>
                 <div class="col col-2 text-center">{{ans}}</div>
                 <div class="col col-3 text-center">{{res}}</div>
+                <div class="col col-4 text-center">{{j}}</div>
             </li>
             {% endfor %}
         </ul>

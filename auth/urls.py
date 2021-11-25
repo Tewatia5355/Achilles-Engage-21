@@ -80,4 +80,5 @@ urlpatterns = [
         views.res_key_check,
         name="res_key_check",
     ),
+    path("fill_omr/<int:assignment_id>", views.fill_omr, name="fill_omr"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
+    <title>OMR Filler</title>
+    <style>
+        canvas {
+            margin-left: 100px;
+            margin-top: 20px;
+            border: 2px solid grey;
+        }
+    </style>
+    <script>
+
+
+        // Brush colour and size
+        const colour = "#000000";
+        const strokeWidth = 15;
+
+        // Drawing state
+        let latestPoint;
+        let drawing = false;
+
+        // Drawing functions
+
+        const continueStroke = newPoint => {
+            context.beginPath();
+            context.moveTo(latestPoint[0], latestPoint[1]);
+            context.strokeStyle = colour;
+            context.lineWidth = strokeWidth;
+            context.lineCap = "round";
+            context.lineJoin = "round";
+            context.lineTo(newPoint[0], newPoint[1]);
+            context.stroke();
+
+            latestPoint = newPoint;
+        };
+
+        // Event helpers
+
+        const startStroke = point => {
+            drawing = true;
+            latestPoint = point;
+        };
+
+        const BUTTON = 0b01;
+        const mouseButtonIsDown = buttons => (BUTTON & buttons) === BUTTON;
+
+
+        const mouseMove = evt => {
+            if (!drawing) {
+                return;
+            }
+            continueStroke([evt.offsetX, evt.offsetY]);
+        };
+
+        const mouseDown = evt => {
+            if (drawing) {
+                return;
+            }
+            evt.preventDefault();
+            canvas.addEventListener("mousemove", mouseMove, false);
+            startStroke([evt.offsetX, evt.offsetY]);
+        };
+
+        const mouseEnter = evt => {
+            if (!mouseButtonIsDown(evt.buttons) || drawing) {
+                return;
+            }
+            mouseDown(evt);
+        };
+
+        const endStroke = evt => {
+            if (!drawing) {
+                return;
+            }
+            drawing = false;
+            evt.currentTarget.removeEventListener("mousemove", mouseMove, false);
+            canvasLogBook.logDrawing();
+        };
+
+
+        const getTouchPoint = evt => {
+            if (!evt.currentTarget) {
+                return [0, 0];
+            }
+            const rect = evt.currentTarget.getBoundingClientRect();
+            const touch = evt.targetTouches[0];
+            return [touch.clientX - rect.left, touch.clientY - rect.top];
+        };
+
+        const touchStart = evt => {
+            if (drawing) {
+                return;
+            }
+            evt.preventDefault();
+            startStroke(getTouchPoint(evt));
+        };
+
+        const touchMove = evt => {
+            if (!drawing) {
+                return;
+            }
+            continueStroke(getTouchPoint(evt));
+        };
+
+        const touchEnd = evt => {
+            drawing = false;
+        };
+
+
+        // // 
+        // // 
+
+
+
+
+    </script>
+
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="mb-4 navbar navbar-expand-lg navbar-dark indigo">
+        <a class="navbar-brand" href="{% url 'profile' %}">Achilles</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link waves-effect waves-light" href="/profile">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link waves-effect waves-light" href="/logout">Logout</a>
+                </li>
+            </ul>
+            <span class="navbar-text white-text">
+                Fill OMR Sheet
+            </span>
+        </div>
+    </nav>
+
+    <!--  -->
+    <div class="container">
+        <h3>Fill OMR Sheet here</h3>
+        <h5>Also upload solution refrence file</h5>
+    </div>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col" style="border: 5px solid purple;padding: 20px 20px 20px 20px;">
+                <form method="post" action="{% url 'submit_assignment_request_omr' assignment_id=assignment_id %}"
+                    enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <p style="color:black; font-family:verdana;">
+                        Solution File:
+                        <input type="file" name="file2" accept=".pdf" required />
+                    </p>
+                    <p class="text-center" style="border: 2px solid rgb(35, 241, 8);color:black; font-family:verdana;">
+                        Fill the OMR below! Submit for Evaluation
+                    </p>
+                    <input type="hidden" name="file" id="imageData" />
+                    <button onclick="submit_omr()" /> Submit </button>
+                </form>
+            </div>
+            <div class="col text-right">
+                <button onclick="canvasLogBook.undo()">undo</button>
+                <button onclick="canvasLogBook.redo()">redo</button>
+            </div>
+        </div>
+    </div>
+    <canvas id="my-canvas" width="968px" height="1342px" />
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    var canvas = document.getElementById('my-canvas');
+    var context = canvas.getContext('2d');
+    var img = new Image();
+    img.src = "{% static 'images/comr.jpg' %}";
+    img.crossOrigin = "anonymous";
+    img.onload = () => { context.drawImage(img, 0, 0, 968, 1342); };
+
+    canvas.addEventListener("touchstart", touchStart, false);
+    canvas.addEventListener("touchend", touchEnd, false);
+    canvas.addEventListener("touchcancel", touchEnd, false);
+    canvas.addEventListener("touchmove", touchMove, false);
+
+    // Register event handlers
+
+    canvas.addEventListener("mousedown", mouseDown, false);
+    canvas.addEventListener("mouseup", endStroke, false);
+    canvas.addEventListener("mouseout", endStroke, false);
+    canvas.addEventListener("mouseenter", mouseEnter, false);
+
+    var isFirefox = typeof InstallTrigger !== 'undefined';
+    var CanvasLogBook = function () {
+        this.index = 0;
+        this.logs = [];
+        this.logDrawing();
+    };
+    CanvasLogBook.prototype.sliceAndPush = function (imageObject) {
+        var array;
+        if (this.index == this.logs.length - 1) {
+            this.logs.push(imageObject);
+            array = this.logs;
+        } else {
+            var tempArray = this.logs.slice(0, this.index + 1);
+            tempArray.push(imageObject);
+            array = tempArray;
+        }
+        if (array.length > 1) {
+            this.index++;
+        }
+        return array;
+    };
+    CanvasLogBook.prototype.logDrawing = function () {
+
+        if (isFirefox) {
+            var image = new Image();
+            image.src = document.getElementById('my-canvas').toDataURL();
+            this.logs = this.sliceAndPush(image);
+        } else {
+            var imageData = document.getElementById('my-canvas').toDataURL();
+            this.logs = this.sliceAndPush(imageData);
+        }
+    };
+    CanvasLogBook.prototype.undo = function () {
+        context.clearRect(0, 0, $('#my-canvas').width(), $('#my-canvas').height());
+        context.drawImage(img, 0, 0, 968, 1342);
+        if (this.index > 0) {
+            this.index--;
+            this.showLogAtIndex(this.index);
+        }
+    };
+    CanvasLogBook.prototype.redo = function () {
+
+        if (this.index < this.logs.length - 1) {
+            context.clearRect(0, 0, $('#my-canvas').width(), $('#my-canvas').height());
+            this.index++;
+            this.showLogAtIndex(this.index);
+        }
+    };
+    CanvasLogBook.prototype.showLogAtIndex = function (index) {
+        context.clearRect(0, 0, $('#my-canvas').width(), $('#my-canvas').height());
+        if (isFirefox) {
+            var image = this.logs[this.index];
+            context.drawImage(image, 0, 0, 968, 1342);
+        } else {
+
+            var image = new Image();
+            image.src = this.logs[this.index];
+            image.onload = () => { context.drawImage(image, 0, 0, 968, 1342); };
+        }
+    };
+    var canvasLogBook = new CanvasLogBook();
+
+    function submit_omr() {
+        var imageData = document.getElementById("my-canvas").toDataURL("image/png");
+        $("#imageData").val(imageData);
+        $(this).submit();
+    };
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script>
+
+</html>
