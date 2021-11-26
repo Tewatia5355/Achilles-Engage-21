@@ -10,18 +10,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css">
     <link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
     <link rel="stylesheet" href="{% static 'css/table.css' %}" />
+
 </head>
 
 <body>
     <!-- NAVBAR -->
     <nav class="mb-4 navbar navbar-expand-lg navbar-dark indigo">
-        <a class="navbar-brand" href="{% url 'profile' %}">Achilles</a>
+        <img src="{% static 'img/Achilles2_logo_1.png' %}" width="70" height="80">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav mr-auto" style="margin-left: 60px;">
                 <li class="nav-item">
                     <a class="nav-link waves-effect waves-light" href="/profile">Home</a>
                 </li>
@@ -58,27 +59,29 @@
         </div>
         <hr>
         <ul class="responsive-table">
-            <li class="table-header">
-                <div class="col col-1 text-center">
-                    <h6><strong>Question Number</strong></h6>
+            <li class="table-header text-white" style="background-color:#FFBB00;">
+                <div class="col text-center my-auto">
+                    <h5><strong>Question Number</strong></h5>
                 </div>
-                <div class="col col-2 text-center">
-                    <h6><strong>Correct Answer</strong></h6>
+                <div class="col text-center my-auto">
+                    <h5><strong>Correct Answer</strong></h5>
                 </div>
-                <div class="col col-3 text-center">
-                    <h6><strong>Your Responses</strong></h6>
+                <div class="col text-center my-auto">
+                    <h5><strong>Your Responses</strong></h5>
                 </div>
-                <div class="col col-4 text-center">
-                    <h6><strong>Judgement</strong></h6>
+                <div class="col text-center my-auto">
+                    <h5><strong>Judgement</strong></h5>
                 </div>
             </li>
+            <hr>
             {% for i,ans,res,j in listt %}
-            <li class="table-row">
-                <div class="col col-1 text-center">{{i}}</div>
-                <div class="col col-2 text-center">{{ans}}</div>
-                <div class="col col-3 text-center">{{res}}</div>
-                <div class="col col-4 text-center">{{j}}</div>
+            <li class="table-row text-center text-white" style="background-color:#FB6542 ;">
+                <div class="col font-weight-bold text-center">{{i}}</div>
+                <div class="col font-weight-bold text-center">{{ans}}</div>
+                <div class="col font-weight-bold text-center">{{res}}</div>
+                <div class="col font-weight-bold text-center">{{j}}</div>
             </li>
+
             {% endfor %}
         </ul>
     </div>

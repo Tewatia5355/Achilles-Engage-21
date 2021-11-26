@@ -10,19 +10,20 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css">
     <link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
+
 </head>
 
 <body>
     <!-- NAVBAR -->
 
     <nav class="mb-4 navbar navbar-expand-lg navbar-dark indigo">
-        <a class="navbar-brand" href="{% url 'profile' %}">Achilles</a>
+        <img src="{% static 'img/Achilles2_logo_1.png' %}" width="70" height="80">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav mr-auto" style="margin-left: 60px;">
                 <li class="nav-item">
                     <a class="nav-link waves-effect waves-light" href="/profile">Home</a>
                 </li>

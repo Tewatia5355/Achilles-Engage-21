@@ -23,9 +23,11 @@
 </head>
 
 <body>
-
-    <h1 style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">Input Answers of each question
+    <br>
+    <h1 class="display-4 text-center">
+        Mark correct answer for each question
     </h1>
+    <hr>
     <div
         style="width: 500px; margin: auto; margin-top:40px; margin-bottom: 50px ;border: 5px solid purple;padding: 20px 20px 20px 20px;">
         <form method="POST" action="{% url 'ans_key' assignment_id=assignment_id %}">

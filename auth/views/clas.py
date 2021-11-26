@@ -116,9 +116,7 @@ def render_class(request, id):
         for assignment in assignments:
             dt1 = datetime.now()
             dt2 = datetime.combine(assignment.due_date, assignment.due_time)
-            print(dt1.time())
-            print(dt2.time())
-            if dt1.date() >= dt2.date():
+            if dt1.date() > dt2.date():
                 assignment.is_available = False
             elif dt1.date() == dt2.date() and dt1.time() >= dt2.time():
                 assignment.is_available = False
@@ -149,8 +147,6 @@ def render_class(request, id):
         print("Std error: ", e)
         students = None
     role = request.user.last_name
-
-    print(assignments[0].is_available)
 
     ## Empty test list, will contain details about [test, submission marks of kids, total marks of the test]
     test = []

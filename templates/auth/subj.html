@@ -22,19 +22,24 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css"
         integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+    <style>
+        .jumbotron {
+            background: url("{% static 'img/page-bg/4.jpg' %}") center center / cover no-repeat;
+        }
+    </style>
 </head>
 
 <body>
     <!--  -->
 
     <nav class="mb-4 navbar navbar-expand-lg navbar-dark indigo">
-        <a class="navbar-brand" href="{% url 'profile' %}">Achilles</a>
+        <img src="{% static 'img/Achilles2_logo_1.png' %}" width="70" height="80">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav mr-auto">
+        <div class="collapse navbar-collapse " id="navbarText">
+            <ul class="navbar-nav mr-auto" style="margin-left: 60px;">
                 <li class="nav-item">
                     <a class="nav-link waves-effect waves-light" href="/profile">Home</a>
                 </li>
@@ -64,12 +69,12 @@
     </nav>
 
     <!-- Class Name banner  -->
-    <div class="jumbotron jumbotron-fluid class_jumbotron bg-faded">
+    <div class="jumbotron jumbotron-fluid">
         <div class="container ">
-            <h1 class="display-4 class_title">{{ classroom.classroom_name }}</h1>
-            <p class="lead class_code">Class code: {{ classroom.class_code }}</p>
+            <h1 class="display-4 class_title" style="color:rgb(224, 152, 16);">{{ classroom.classroom_name }}</h1>
+            <p class="lead class_code" style="color:peachpuff;">Class code: {{ classroom.class_code }}</p>
             {% if role == "Teacher" %}
-            <button class="btn btn-success" type="submit" data-toggle="modal" data-target="#send_invites">Send
+            <button class="btn btn-primary" type="submit" data-toggle="modal" data-target="#send_invites">Send
                 Invite
             </button>
             {% endif %}
@@ -83,7 +88,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">send_invites</h5>
+                    <h5 class="modal-title">Send Invitation using emails</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -92,6 +97,7 @@
                     <form method="POST" class="cclass_form" name="send_invites" id="create_invite_form">
                         {% csrf_token %}
                         <div class="form-group">
+                            <p>Seperate emails using ','</p>
                             <input type="text" class="form-control" id="emails"
                                 placeholder="john@gmail.com,rkumar@gmail.com" />
                         </div>
@@ -123,7 +129,8 @@
                 <blockquote class="blockquote mb-0">
                     <p>{{ notification.message }}</p>
                     {% if notification.attached %}
-                    <p><a href="{% get_media_prefix %}{{ notification.attachment }}" download>Download Attachment
+                    <p><a class="btn btn-info" href="{% get_media_prefix %}{{ notification.attachment }}"
+                            download>Download Attachment
                         </a></p>
                     {% endif %}
                     <footer class="blockquote-footer">Posted at <strong>{{ notification.posted_time }}</strong> on
@@ -137,7 +144,7 @@
         {% endfor %}
         {% endif %}
     </div>
-
+    <br>
     <!-- Test Section -->
     <div class="container">
         <h3 class="display-8 class_title">Test Section: </h3>
@@ -152,26 +159,28 @@
                 {% elif submission == None and assignment.is_available == True %}
                 <a href="{% url 'sub_url' assignment_id=assignment.id %}">
                     {% endif %}
-
-                    <div class="card border-right-2 px-4 py-4 mx-1 my-2  bg-light">
-                        <div class="card-header text-center"><strong>{{assignment.assignment_name}}</strong></div>
+                    <div class="card border-right-2 px-4 py-4 mx-1 my-2" style="background-color: #589199;">
+                        <div class="card-header text-center text-white" style="background-color:#003B46;">
+                            <strong>{{assignment.assignment_name}}</strong>
+                        </div>
                         <div class="card-body">
                             {% if submission != None and submission != -1 %}
-                            <h6 class="card-title mb-4 text-center">Marks Obtained:
+                            <h6 class="card-title mb-4 text-center  text-white">Marks Obtained:
                                 {{submission.marks_alloted}}/{{tmarks}}</h6>
                             {% if assignment.show_result %}
-                            <p class="text-center"><a
+                            <p class="text-center"><a class="btn btn-dark"
                                     href="{% url 'res_key_check' assignment_id=assignment.id submission_id=submission.id %}">Click
                                     here for Answer Key</a></p>
                             {% endif %}
                             {% elif submission == -1%}
-                            <h6 class="card-title mb-4 text-center ">Please wait till Test due time for grading!!</h6>
+                            <h6 class="card-title mb-4 text-center text-white ">Please wait till Test due time for
+                                grading!!</h6>
                             {% else %}
                             {% endif %}
-                            <h6 class="card-text text-center mt-2">Test posted on
+                            <h6 class="card-text text-center mt-2  text-white">Test posted on
                                 <strong>{{ assignment.posted_date}}</strong>
                             </h6>
-                            <h6 class="card-text text-center mt-2">
+                            <h6 class="card-text text-center mt-2  text-white">
                                 Test due at <strong>{{ assignment.due_time }}</strong> on
                                 <strong>{{ assignment.due_date}}</strong>
                             </h6>

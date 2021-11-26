@@ -82,7 +82,7 @@ def submit_assignment_request_omr(request, assignment_id):
 @student_required("profile")
 def submit_omr_success(request, assignment_id):
     assignment = Assignments.objects.get(pk=assignment_id)
-    # mail.submission_done_mail(assignment_id, request.user)
+    mail.submission_done_mail(assignment_id, request.user)
     return redirect("render_class", assignment.classroom_id.id)
 
 

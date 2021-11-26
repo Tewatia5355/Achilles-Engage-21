@@ -11,19 +11,21 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css">
     <link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
+    <style>
+    </style>
 </head>
 
 <body>
 
     <!-- Navbar -->
     <nav class="mb-4 navbar navbar-expand-lg navbar-dark indigo">
-        <a class="navbar-brand" href="{% url 'profile' %}">Achilles</a>
+        <img src="{% static 'img/Achilles2_logo_1.png' %}" width="70" height="80">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav mr-auto" style="margin-left: 60px;">
                 <li class="nav-item">
                     <a class="nav-link waves-effect waves-light" href="/profile">Home</a>
                 </li>
@@ -37,47 +39,32 @@
         </div>
     </nav>
 
-    <!-- Summary -->
-    <h3 class="text-center">Assignment Summary Page</h3>
-    <hr>
-    <div class="row">
-        <div class="col text-center">
-            <h4> Total Number students in Class: {{ no_of_students.count }}</h4>
-        </div>
-        <div class="col text-center">
-            <h4> No. of Submissions till now: {{ submissions_count }}</h4>
-        </div>
-        <div class="col text-center">
-            <h5><a href="{% url 'delete_assignment' assignment_id=assignment.id %}">Delete Assignment</a></h5>
-        </div>
+    <!-- Assignment Summary Section -->
+
+    <div class="jumbotron bg-light">
+        <h1 class="display-4 text-center">Assignment Summary Page</h1>
+        <p class="lead text-center">Students in class: {{no_of_students.count}}</p>
+        <p class="lead text-center">Submissions till now: {{submissions_count}}</p>
+        <hr class="my-4">
+        <p>
+        <h5>Basic Information</h5>
+        <ul>
+            <li>Marks for Correct Response: {{assignment.positive_marks}}</li>
+            <li>Marks for Incorrect Response: {{assignment.negative_marks}}</li>
+            <li>Total number of Questions: {{assignment.num_ques}}</li>
+        </ul>
+        </p>
+        <p class="lead text-center">
+            <a class="btn btn-primary btn-lg" href="{% get_media_prefix %}{{ assignment.question_file }}"
+                download>Download Questions</a>
+
+            {% if assignment.result != "" %}
+            <a class="btn btn-primary btn-lg" href="{% get_media_prefix %}{{ assignment.result }}" download>Download
+                Result</a>
+            {% endif %}
+        </p>
     </div>
-    <br>
-    <!-- <div class="row">
-        <div class="col text-center">
-            <h4> Some Useful Link: </h4>
-        </div>
-        <div class="col text-center">
-            <p><a href="{% get_media_prefix %}{{ assignment.question_file }}" download> Download Question Paper </a></p>
-        </div>
-        {% if assignment.result != "" %}
-        <div class="col text-center">
-            <p><a href="{% get_media_prefix %}{{ assignment.result }}" download> Download CSV result of student </a></p>
-        </div>
-        {% endif %}
-    </div> -->
-    <h5 style="margin-left: 10px;">
-        Question Paper:
-        <small><a href="{% get_media_prefix %}{{ assignment.question_file }}" download>Link
-            </a></small>
-    </h5>
-    <br>
-    {% if assignment.result != "" %}
-    <h5 style="margin-left: 10px;">
-        CSV Result Sheet:
-        <small><a href="{% get_media_prefix %}{{ assignment.result }}" download> Link
-            </a></small>
-    </h5>
-    {% endif %}
+
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
