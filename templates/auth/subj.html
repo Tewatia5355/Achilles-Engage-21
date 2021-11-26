@@ -63,12 +63,45 @@
         </div>
     </nav>
 
+    <!-- Class Name banner  -->
     <div class="jumbotron jumbotron-fluid class_jumbotron bg-faded">
         <div class="container ">
             <h1 class="display-4 class_title">{{ classroom.classroom_name }}</h1>
             <p class="lead class_code">Class code: {{ classroom.class_code }}</p>
+            {% if role == "Teacher" %}
+            <button class="btn btn-success" type="submit" data-toggle="modal" data-target="#send_invites">Send
+                Invite
+            </button>
+            {% endif %}
         </div>
     </div>
+
+
+    <!-- Modals for send invites -->
+    {% if role == "Teacher" %}
+    <div class="modal" tabindex="-1" id="send_invites">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">send_invites</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" class="cclass_form" name="send_invites" id="create_invite_form">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="emails"
+                                placeholder="john@gmail.com,rkumar@gmail.com" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
 
     <!-- Annoucement Section -->
     <div class="container">
@@ -159,6 +192,28 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script>
 
+<script>
+    $("#create_invite_form").on("submit", function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: '{% url "send_invites" class_code=classroom.class_code %}',
+            data: {
+                emails: $("#emails").val(),
+                csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+                action: "post",
+            },
+            success: function (json) {
+                document.getElementById("create_invite_form").reset();
+                window.location.href = "javascript:timedRefresh(1)";
+                window.location.reload();
+            },
+            error: function (xhr, errmsg, err) {
+                console.log(xhr.status + ": " + xhr.responseText);
+            },
+        });
+    });
 
+</script>
 
 </html>

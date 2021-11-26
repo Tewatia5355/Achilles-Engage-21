@@ -2,6 +2,7 @@ from django.core.mail import send_mail
 from eng.settings import EMAIL_HOST_USER
 from .models import Submissions, Assignments, Classrooms, Students, Notification
 from django.contrib.auth.models import User
+from django.template.loader import render_to_string
 from datetime import datetime
 
 ## Function to send mail
@@ -67,3 +68,31 @@ def notification_post_mail(classroom_id, notification_id):
     )
     subject = "New Annoucement in {} class".format(classroom_name)
     send_email(subject, email_list, message)
+
+
+## Mail when new assignment is posted in class, every student will be informed
+def send_invites_exist(emails, class_code, name, domain):
+    message = render_to_string(
+        "invite_exist.html",
+        {
+            "name": name,
+            "domain": domain,
+            "class_code": class_code,
+        },
+    )
+    subject = "New Invitation for joining class"
+    send_email(subject, emails, message)
+
+
+## Mail when new assignment is posted in class, every student will be informed
+def send_invites_notExist(emails, class_code, name, domain):
+    message = render_to_string(
+        "invite_notExist.html",
+        {
+            "name": name,
+            "domain": domain,
+            "class_code": class_code,
+        },
+    )
+    subject = "New Invitation for joining class"
+    send_email(subject, emails, message)

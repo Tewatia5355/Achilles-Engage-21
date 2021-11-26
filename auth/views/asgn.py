@@ -22,7 +22,7 @@ def ans_key_fun(request, assignment_id):
             assignment.save()
 
             # mailing every student that one test has been created inside your classroom
-            # mail.assignment_post_mail(assignment.classroom_id, assignment.id)
+            mail.assignment_post_mail(assignment.classroom_id, assignment.id)
 
             return redirect("render_class", assignment.classroom_id.id)
         except Exception as e:

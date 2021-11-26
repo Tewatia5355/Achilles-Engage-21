@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.files import File
+from .. import mail
 from ..codegen import generate_class_code
 from ..decorators import access_class, teacher_required, student_required
 from ..models import (
@@ -19,7 +20,7 @@ from django.forms.models import model_to_dict
 from itertools import chain
 import os
 import pandas as pd
-import time
+import time, re
 
 ## Student unenrolling from a class
 @login_required(login_url="login")
@@ -45,20 +46,90 @@ def delete_class(request, classroom_id):
     return redirect("profile")
 
 
+## Teacher deleting a class
+@login_required(login_url="login")
+def send_invites(request, class_code):
+    classroom = Classrooms.objects.get(class_code=class_code)
+    if request.method == "POST":
+        name = request.user.first_name
+        emails = list((request.POST.get("emails")).split(","))
+        print("\n\n", request.POST, "\n\n")
+        print("\n\n", emails, "\n\n")
+        regex = "^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$"
+        gen_email_notExist = []
+        gen_email_exist = []
+        for email in emails:
+            email = email.strip()
+            if re.search(regex, email):
+                try:
+                    user = User.objects.get(username=email)
+                    try:
+                        student = Students.objects.get(
+                            student_id=request.user, classroom_id=classroom
+                        )
+                        continue
+                    except:
+                        gen_email_exist.append(email)
+                except User.DoesNotExist:
+                    gen_email_notExist.append(email)
+        if len(gen_email_notExist) > 0:
+            mail.send_invites_notExist(
+                gen_email_notExist, class_code, name, get_current_site(request).domain
+            )
+        if len(gen_email_exist) > 0:
+            mail.send_invites_exist(
+                gen_email_exist, class_code, name, get_current_site(request).domain
+            )
+        return JsonResponse({"status": "SUCCESS"})
+    try:
+        student = Students.objects.filter(
+            student_id=request.user, classroom_id=classroom
+        )
+        user = User.objects.get(pk=request.user.id)
+        if student.count() != 0 or user.last_name == "Teacher":
+            return redirect("profile")
+    except Exception as e:
+        print(e)
+        return redirect("profile")
+    student = Students(student_id=request.user, classroom_id=classroom)
+    student.save()
+    return redirect("render_class", id=classroom.id)
+
+
 ## rendering class page from profile page
 @login_required(login_url="login")
 @access_class("profile")
 def render_class(request, id):
+    try:
+        directory = str(os.getcwd())
+        files_in_directory = os.listdir(directory)
+        filtered_files = [file for file in files_in_directory if file.endswith(".csv")]
+        for file in filtered_files:
+            path_to_file = os.path.join(directory, file)
+            os.remove(path_to_file)
+    except Exception as e:
+        print("\n\n", e, "\n\n")
     name = request.user.first_name
     classroom = Classrooms.objects.get(pk=id)
     try:
+        assignments = Assignments.objects.filter(classroom_id=id)
+        for assignment in assignments:
+            dt1 = datetime.now()
+            dt2 = datetime.combine(assignment.due_date, assignment.due_time)
+            print(dt1.time())
+            print(dt2.time())
+            if dt1.date() >= dt2.date():
+                assignment.is_available = False
+            elif dt1.date() == dt2.date() and dt1.time() >= dt2.time():
+                assignment.is_available = False
+            else:
+                assignment.is_available = True
+            assignment.save()
+            if assignment.ans_key == None:
+                assignment.delete()
         assignments = Assignments.objects.filter(classroom_id=id).order_by(
             "-due_date", "-due_time"
         )
-        for assignment in assignments:
-            if assignment.ans_key == None:
-                assignment.delete()
-        assignments = Assignments.objects.filter(classroom_id=id)
     except Exception as e:
         print("Asgn error: ", e)
         assignments = None
@@ -79,15 +150,7 @@ def render_class(request, id):
         students = None
     role = request.user.last_name
 
-    ## Marking Test is available by student to be solved by student or not
-    for assignment in assignments:
-        dt1 = datetime.now()
-        dt2 = datetime.combine(assignment.due_date, assignment.due_time)
-        if dt1.time() >= dt2.time():
-            assignment.is_available = False
-        else:
-            assignment.is_available = True
-        assignment.save()
+    print(assignments[0].is_available)
 
     ## Empty test list, will contain details about [test, submission marks of kids, total marks of the test]
     test = []
@@ -167,12 +230,6 @@ def render_class(request, id):
                 assignment.result = File(f)
                 assignment.save()
                 f.closed
-                time.sleep(2)
-                try:
-                    os.remove(f"result_{assignment.id}.csv")
-                except Exception as e:
-                    print("\n\n", e, "\n\n")
-
             test.append([assignment, None, None])
 
     current_site = get_current_site(request)

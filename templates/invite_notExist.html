@@ -1,0 +1,10 @@
+{% autoescape off %} Welcome to Achilles - Engage '21 platform,
+Dear Student,{{name}} has Invited you to join a class,
+Before that make your account on our portal Achilles, as a Student.
+For that click on link http://{{domain}}{% url 'signup' %}
+
+Then,
+Click on the link: http://{{ domain }}{% url 'send_invites' class_code=class_code %}
+Thanks,
+Achilles
+{% endautoescape %}
