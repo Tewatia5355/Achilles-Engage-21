@@ -4,6 +4,14 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.files import File
+from django.forms.models import model_to_dict
+
+from datetime import datetime
+from itertools import chain
+import os
+import pandas as pd
+import time, re
+
 from .. import mail
 from ..codegen import generate_class_code
 from ..decorators import access_class, teacher_required, student_required
@@ -15,12 +23,7 @@ from ..models import (
     Submissions,
     Notification,
 )
-from datetime import datetime
-from django.forms.models import model_to_dict
-from itertools import chain
-import os
-import pandas as pd
-import time, re
+
 
 ## Student unenrolling from a class
 @login_required(login_url="login")

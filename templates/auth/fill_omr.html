@@ -150,12 +150,14 @@
         </div>
     </nav>
 
-    <!--  -->
+    <!-- Heading-->
     <div class="container">
         <h3>Fill OMR Sheet here</h3>
         <h5>Also upload solution refrence file</h5>
     </div>
     <hr>
+
+    <!-- Form for filling details -->
     <div class="container">
         <div class="row">
             <div class="col" style="border: 5px solid purple;padding: 20px 20px 20px 20px;">
@@ -173,12 +175,15 @@
                     <button onclick="submit_omr()" /> Submit </button>
                 </form>
             </div>
+            <!-- Undo Redo buttons -->
             <div class="col text-right">
                 <button onclick="canvasLogBook.undo()">undo</button>
                 <button onclick="canvasLogBook.redo()">redo</button>
             </div>
         </div>
     </div>
+
+    <!-- Canvas for sketching -->
     <canvas id="my-canvas" width="968px" height="1342px" />
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

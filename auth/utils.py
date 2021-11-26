@@ -3,6 +3,8 @@ import numpy as np
 import imutils
 from imutils import contours
 
+## Uses open-cv to evaluate OMR sheet
+
 
 def order_points(pts):
     rect = np.zeros((4, 2), dtype="float32")
@@ -33,6 +35,7 @@ def four_point_transform(image, pts):
     return warped
 
 
+## Here we give the path to OMR and get response string back after evaluation
 def calc_resp(path):
     p2 = str(os.getcwd())
     path = p2.replace("\\", "\\\\") + path.replace("/", "\\\\")

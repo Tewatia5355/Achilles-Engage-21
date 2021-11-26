@@ -67,6 +67,8 @@ def submit_assignment_request_omr(request, assignment_id):
             response.append([i + 1, "Unattempted"])
         else:
             response.append([i + 1, response_key[i]])
+
+    ## Check if OMR was submitted as expected
     return render(
         request,
         "auth/sub_omr.html",
@@ -78,6 +80,7 @@ def submit_assignment_request_omr(request, assignment_id):
     )
 
 
+## if confirmed the OMR was evaluated as expected, save the submission
 @login_required(login_url="login")
 @student_required("profile")
 def submit_omr_success(request, assignment_id):
@@ -148,12 +151,14 @@ def submission_summary(request, assignment_id):
     )
 
 
+## Render the online Canvas to fill the OMR
 @login_required(login_url="login")
 @student_required("home")
 def fill_omr(request, assignment_id):
     return render(request, "auth/fill_omr.html", {"assignment_id": assignment_id})
 
 
+## After submission of assignment check your responses, corresponding to Answer key
 @login_required(login_url="login")
 @student_required("home")
 def res_key_check(request, assignment_id, submission_id):

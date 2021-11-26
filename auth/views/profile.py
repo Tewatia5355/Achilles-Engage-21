@@ -1,8 +1,11 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
-from ..models import Students, Teachers
+
 from itertools import chain
+
+from ..models import Students, Teachers
+
 
 ## Home page rendering, you will see all the classes here
 @login_required(login_url="login")
