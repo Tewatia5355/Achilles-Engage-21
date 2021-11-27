@@ -2,7 +2,7 @@
 
 > All in one cloud-based learning management system (LMS) gives you all the tools you need to create, deliver, track and analyze the Test/Quizzes, includes easy to use Annoucement maker along with attachments.
 
-### 🏠 [Homepage](achilles.cloudns.asia)
+### 🏠 [Homepage](https://achilles.cloudns.asia)
 
 ## How to Use
 #### Install
