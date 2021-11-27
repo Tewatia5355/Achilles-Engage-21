@@ -38,7 +38,8 @@ def four_point_transform(image, pts):
 ## Here we give the path to OMR and get response string back after evaluation
 def calc_resp(path):
     p2 = str(os.getcwd())
-    path = p2.replace("\\", "\\\\") + path.replace("/", "\\\\")
+    path = p2.replace("\\", "/") + path
+    print(path)
     image = cv2.imread(path)
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     blurred = cv2.GaussianBlur(gray, (5, 5), 0)

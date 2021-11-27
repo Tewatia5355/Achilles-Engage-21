@@ -45,7 +45,9 @@
         <h1 class="display-4 text-center">Assignment Summary Page</h1>
         <p class="lead text-center">Students in class: {{no_of_students.count}}</p>
         <p class="lead text-center">Submissions till now: {{submissions_count}}</p>
-        <hr class="my-4">
+        <a class="btn btn-danger btn-lg" href="{% url 'delete_assignment' assignment_id=assignment.id %}">Delete
+            Assignment</a>
+	<hr class="my-4">
         <p>
         <h5>Basic Information</h5>
         <ul>

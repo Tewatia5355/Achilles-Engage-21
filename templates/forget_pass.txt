@@ -1,7 +1,7 @@
 {% autoescape off %} Welcome to Achilles - Engage '21 platform,
 Please Change your Password by clicking on the following link.
 Confirmation link: https://{{ domain }}{% url 'forget' uid64=uid token=token %}
-This link can only be used once. If you need to reset your password again, please visit {{ protocol }}://{{domain}} and request another reset.
+This link can only be used once. If you need to reset your password again, please visit https://{{domain}} and request another reset.
 If you did not make this request, you can simply ignore this email.
 Thanks,
 Achilles
