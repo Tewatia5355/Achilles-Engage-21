@@ -49,7 +49,7 @@ def delete_class(request, classroom_id):
     return redirect("profile")
 
 
-## Teacher deleting a class
+## Teacher Send invites
 @login_required(login_url="login")
 def send_invites(request, class_code):
     classroom = Classrooms.objects.get(class_code=class_code)
@@ -113,6 +113,7 @@ def render_class(request, id):
     except Exception as e:
         print("\n\n", e, "\n\n")
     name = request.user.first_name
+    name2 = (request.user.first_name).replace(" ", "_")
     classroom = Classrooms.objects.get(pk=id)
     try:
         assignments = Assignments.objects.filter(classroom_id=id)
@@ -246,6 +247,7 @@ def render_class(request, id):
             "role": role,
             "test": test,
             "name": name,
+            "name2": name2,
         },
     )
 

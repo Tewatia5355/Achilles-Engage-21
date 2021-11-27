@@ -16,6 +16,7 @@ def create_notification(request, classroom_id, name):
             heading = request.POST.get("noti_header")
             message = request.POST.get("noti_message")
             attachment = request.FILES.get("file", False)
+            name = name.replace("_", " ")
             classroom_id = Classrooms.objects.get(pk=classroom_id)
             if attachment:
                 notification = Notification(
