@@ -11,14 +11,6 @@ EMAIL_HOST_USER = EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
 EMAIL_PORT = EMAIL_PORT
 
-
-# Add to project/settings.py
-SECURE_HSTS_SECONDS = 2592000  # Unit is seconds; *USE A SMALL VALUE FOR TESTING!*
-SECURE_HSTS_PRELOAD = True
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -26,9 +18,9 @@ SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
 SECRET_KEY = "django-insecure-+2jc196%2imdrf*3erqqafw3ia&w$p*^#urk_32@mf)9vkp0ju"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = [".achilles.cloudns.asia", ".20.212.32.4"]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -121,9 +113,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = "/var/www/achilles.cloudns.asia/static"
-STATIC_URL = "/static/"
-STATICFILES_DIRS = [BASE_DIR/"static"]
+STATIC_ROOT = os.path.join(PROJECT_DIR, "static")
+STATIC_URL = "static/"
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "auth/static/")]
 MEDIA_URL = "media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
