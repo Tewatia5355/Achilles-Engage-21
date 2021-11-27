@@ -25,9 +25,9 @@ SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
 SECRET_KEY = "django-insecure-+2jc196%2imdrf*3erqqafw3ia&w$p*^#urk_32@mf)9vkp0ju"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = [".achilles.cloudns.asia", ".20.212.32.4"]
+ALLOWED_HOSTS = [".achilles.cloudns.asia"]
 
 
 # Application definition
