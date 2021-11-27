@@ -52,7 +52,7 @@ def signup(request):
         message = (
             "Hello "
             + myuser.first_name
-            + "!!\nWelcome to Achilles Platform.\nThank you for visiting our Website\nA confirmation mail has been sent to you, please confirm you email\n\nThank You\n Achilles"
+            + "!!\nWelcome to Achilles Platform.\nThank you for visiting our Website\nA confirmation mail has been sent to you, please confirm you email,\n(Please check Spam for same)\n\nThank You\n Achilles"
         )
         from_email = settings.EMAIL_HOST_USER
         to_list = [myuser.email]
