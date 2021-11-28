@@ -79,6 +79,43 @@
 
 ****
 
+![Class Page 1](https://github.com/Tewatia5355/Achilles-Engage-21/blob/main/Screenshots/Student/Student%20-%20Class%20Page%201.png?raw=true)
+![Class Page 2](https://github.com/Tewatia5355/Achilles-Engage-21/blob/main/Screenshots/Student/Student%20-%20Class%20Page%202.png?raw=true)
+<h6 align="center">Class Page</h6>
+
+****
+
+![Submission Page](https://github.com/Tewatia5355/Achilles-Engage-21/blob/main/Screenshots/Student/Student%20-%20Submission%20Page.png?raw=true)
+<h6 align="center">Submission Test Page</h6>
+
+****
+
+
+![Fill OMR](https://github.com/Tewatia5355/Achilles-Engage-21/blob/main/Screenshots/Student/Student%20-%20Fill%20OMR%20Page.png?raw=true)
+<h6 align="center">Fill OMR Page</h6>
+
+****
+
+![Check OMR](https://github.com/Tewatia5355/Achilles-Engage-21/blob/main/Screenshots/Student/Student%20-%20Check%20OMR%20Page.png?raw=true)
+<h6 align="center">Check OMR Page</h6>
+
+****
+
+![After Test](https://github.com/Tewatia5355/Achilles-Engage-21/blob/main/Screenshots/Student/Student%20-%20After%20Test%20Page.png?raw=true)
+<h6 align="center">After Test Page</h6>
+
+****
+
+![Result Test](https://github.com/Tewatia5355/Achilles-Engage-21/blob/main/Screenshots/Student/Student%20-%20Result%20Page.png?raw=true)
+<h6 align="center">Result Page</h6>
+
+****
+
+![Check Response](https://github.com/Tewatia5355/Achilles-Engage-21/blob/main/Screenshots/Student/Student%20-%20Check%20Response.png?raw=true)
+<h6 align="center">Check Response Page</h6>
+
+****
+
 #### Teacher
 
 
