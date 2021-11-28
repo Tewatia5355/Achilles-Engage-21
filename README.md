@@ -106,7 +106,7 @@
 
 ****
 
-![Result Test](https://github.com/Tewatia5355/Achilles-Engage-21/blob/main/Screenshots/Student/Student%20-%20Result%20Page.png?raw=true)
+![Result Test](https://github.com/Tewatia5355/Achilles-Engage-21/blob/main/Screenshots/Student/Student%20-%20Result%20page.png?raw=true)
 <h6 align="center">Result Page</h6>
 
 ****
@@ -118,7 +118,47 @@
 
 #### Teacher
 
+![Home Page](https://github.com/Tewatia5355/Achilles-Engage-21/blob/main/Screenshots/Teacher/Teacher%20-%20Home%20Page.png?raw=true)
+<h6 align="center">Home Page</h6>
 
+****
+
+
+![Create Class Page](https://github.com/Tewatia5355/Achilles-Engage-21/blob/main/Screenshots/Teacher/Teacher%20-%20Create%20Class.png?raw=true)
+<h6 align="center">Create Class Page</h6>
+
+****
+
+![Class Page 1](https://github.com/Tewatia5355/Achilles-Engage-21/blob/main/Screenshots/Teacher/Teacher%20-%20Class%20Page.png?raw=true)
+![Class Page 2](https://github.com/Tewatia5355/Achilles-Engage-21/blob/main/Screenshots/Teacher/Teacher%20-%20Class%20Page%202.png?raw=true)
+<h6 align="center">Class Page</h6>
+
+****
+
+![Send Invites](https://github.com/Tewatia5355/Achilles-Engage-21/blob/main/Screenshots/Teacher/Teacher%20-%20Send%20Invites.png?raw=true)
+<h6 align="center">Send Invites</h6>
+
+****
+
+![Create Annoucement](https://github.com/Tewatia5355/Achilles-Engage-21/blob/main/Screenshots/Teacher/Teacher%20-%20Create%20Annoucement.png?raw=true)
+<h6 align="center">Create Annoucement</h6>
+
+****
+
+![Create Test](https://github.com/Tewatia5355/Achilles-Engage-21/blob/main/Screenshots/Teacher/Teacher%20-%20Create%20Test.png?raw=true)
+<h6 align="center">Create Test Page</h6>
+
+****
+
+![Test Summary Page](https://github.com/Tewatia5355/Achilles-Engage-21/blob/main/Screenshots/Teacher/Teacher%20-%20Test%20Summary.png?raw=true)
+<h6 align="center">Test Summary Page</h6>
+
+****
+
+![Excel Result Sheet](https://github.com/Tewatia5355/Achilles-Engage-21/blob/main/Screenshots/Teacher/Teacher%20-%20Result%20Sheet.png?raw=true)
+<h6 align="center">Excel Result Sheet</h6>
+
+****
 
 ## Guide to Use Achilles
 #### Install
