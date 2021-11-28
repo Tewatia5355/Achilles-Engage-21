@@ -52,21 +52,33 @@
 
 ![Login](https://github.com/Tewatia5355/Achilles-Engage-21/blob/main/Screenshots/Auth/Login.png?raw=true)
 <h6 align="center">Login</h6>
+
 ****
+
 ![Signup](https://github.com/Tewatia5355/Achilles-Engage-21/blob/main/Screenshots/Auth/Signup.png?raw=true)
 <h6 align="center">Signup</h6>
+
 ****
+
 ![Forget](https://github.com/Tewatia5355/Achilles-Engage-21/blob/main/Screenshots/Auth/Forget%20Password.png?raw=true)
 <h6 align="center">Forget Password</h6>
+
 ****
+
 #### Student 
+
 ****
+
 ![Home](https://github.com/Tewatia5355/Achilles-Engage-21/blob/main/Screenshots/Student/Student%20-%20Home%20Page.png?raw=true)
 <h6 align="center">Home</h6>
+
 ****
+
 ![Join Class](https://github.com/Tewatia5355/Achilles-Engage-21/blob/main/Screenshots/Student/Student%20-%20Join%20Class.png?raw=true)
 <h6 align="center">Join Class</h6>
+
 ****
+
 #### Teacher
 
 
