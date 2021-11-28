@@ -2,16 +2,25 @@
 
 > All in one cloud-based learning management system (LMS) gives you all the tools you need to create, deliver, track and analyze the Test/Quizzes, includes easy to use Annoucement maker along with attachments.
 
+## Table of Contents
+1. [Why Achilles is different ?](#why)
+2. [Online Test Maker](#onlinetest)
+3. [Online Annoucement](#onlineann)
+4. [Screenshots](#ss)
+5. [Guide to use Repo](#guide)
+6. [Author](#author)
+
 ### 🏠 [Homepage](https://achilles.cloudns.asia)
 
-## Why is Achilles different?
+<a name="why"></a>
+## Why Achilles is different?
 - **Extensible** - All features from creating classes and Tests, to evaluating online OMR is built from scratch and with minimal dependencies. Additionally, it's inherits in-built database models of Django. This makes the application highly extensible, i.e features can easily be integrated without worrying about interdependency between components, customization limits.
 - **Adaptable** - The code is compartmentalized, i.e it is broken into components. Changing any feature is an efficient process with an assurance that no other component will be impacted directly.
 - **Easy Integrations** - Achilles, as a platform, can be integrated into any organization's architecture as a microservice. Credits to the agile way of development.
 - **Painless UI** - The UI is built with Bootstrap components, keeping the static files to minimal which greatly increases site loading time, execution time, memory consumption.
 - **Hosted** - Hosted on Azure Virtual Machines, Using NGINX (High-performance Web Server). Also uses Git tools for enforcing Agile Methodology. 
 
-
+<a name="onlinetest"></a>
 ## Online Test maker with Auto-grader in each class 
 - Built with Django backend, OpenCV library, and Bootstrap front-end.
 - Create unlimited Classes.
@@ -28,7 +37,7 @@
 - Easy to operate, High accuracy.
 - No compromise on security, uses client and server side credentials hashing of all data. 
 
-
+<a name="onlineann"></a>
 ## Online Annoucement maker 
 - Built using Django models.
 - Create unlimited Annoucements.
@@ -41,7 +50,7 @@
 - Delete annoucement if required after deadline.
 - Easy to maintain Notices/Annoucement, sorted by recent posted date.
 
-
+<a name="ss"></a>
 ## Screenshots
 
 #### Home Page
@@ -159,7 +168,7 @@
 <h6 align="center">Excel Result Sheet</h6>
 
 ****
-
+<a name="guide"></a>
 ## Guide to Use Achilles
 #### Install
 
@@ -185,7 +194,7 @@ python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 ```
-
+<a name="author"></a>
 ## Author
 
 👤 **Yash Kumar**
