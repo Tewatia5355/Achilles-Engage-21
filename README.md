@@ -4,7 +4,45 @@
 
 ### 🏠 [Homepage](https://achilles.cloudns.asia)
 
-## How to Use
+## Why is Achilles different?
+- **Extensible** - All features from creating classes and Tests, to evaluating online OMR is built from scratch and with minimal dependencies. Additionally, it's inherits in-built database models of Django. This makes the application highly extensible, i.e features can easily be integrated without worrying about interdependency between components, customization limits.
+- **Adaptable** - The code is compartmentalized, i.e it is broken into components. Changing any feature is an efficient process with an assurance that no other component will be impacted directly.
+- **Easy Integrations** - Achilles, as a platform, can be integrated into any organization's architecture as a microservice. Credits to the agile way of development.
+- **Painless UI** - The UI is built with Bootstrap components, keeping the static files to minimal which greatly increases site loading time, execution time, memory consumption.
+- **Hosted** - Hosted on Azure Virtual Machines, Using NGINX (High-performance Web Server). Also uses Git tools for enforcing Agile Methodology. 
+
+
+## Online Test maker with Auto-grader in each class 
+- Built with Django backend, OpenCV library, and Bootstrap front-end.
+- Create unlimited Classes.
+
+#### Features
+- Invite multiple students using email-ids or share the unique class code.
+- Platform to create unlimited Test/Quizzes for your students using our optimised Auto-grader.
+- Reduces Manual work of Teachers, create Test/Quizzes, and get result in Excel.
+- Option to make Responses visible after assessment.
+- Never miss a Test Deadline using automatic emails to each student.  
+- Compiles Test result, with all metrics for further analysis, includes solution reference file too.
+- First in class online OMR filler, practice filling OMR for your Board exams.
+- Delete Classes or Tests after session or evaluations.
+- Easy to operate, High accuracy.
+- No compromise on security, uses client and server side credentials hashing of all data. 
+
+
+## Online Annoucement maker 
+- Built using Django models.
+- Create unlimited Annoucements.
+
+#### Features
+- Notify each student automatically after creating an annoucement.
+- Attach any media file upto 10 MB.
+- Data of file is available for lifetime.
+- Share Meet links in Annoucement for upcoming classes.
+- Delete annoucement if required after deadline.
+- Easy to maintain Notices/Annoucement, sorted by recent posted date.
+
+
+## Guide to Use Achilles
 #### Install
 
 ```
@@ -29,17 +67,6 @@ python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 ```
-## Features
-- Platform to create unlimited Classes for your students.
-- Invite students using email-id or share the unique class code.
-- Create unlimited Test/Quizzes using our optimised Auto-grader.
-- Reduces Manual work of Teachers, just create Test/Quizzes, and get result in Excel.
-- Make Annoucement with feature to attach file.
-- Never miss a Test Deadline/Annocement using automatic emailer.  
-- Compiles Test result, with all metrics for further analysis.
-- First in class online OMR filler, practice filling OMR for your Board exams.
-- Easy to operate, High accuracy.
-- No compromise on security, uses client and server side credentials hashing 
 
 ## Author
 
